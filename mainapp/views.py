@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status, generics, filters
 from rest_framework.renderers import JSONRenderer
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .serializers import *
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ArticlesView(APIView):
@@ -90,3 +92,18 @@ class SubscribeView(APIView):
             sub_serializer.save()
             return Response(status=status.HTTP_201_CREATED)
         return Response(sub_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SearchView(APIView):
+    def post(self, request):
+        search_serializer = SearchSerializer(data=request.data)
+        if search_serializer.is_valid():
+            search = search_serializer.data
+            filtered_article = Article.objects.filter(title__icontains=search['title'])
+            if filtered_article.count() != 0:
+                serialized_search = ArticleSerializer(filtered_article, many=True).data
+                return Response(serialized_search, status=status.HTTP_200_OK)
+            else:
+                return Response(filtered_article.count(), status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(search_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

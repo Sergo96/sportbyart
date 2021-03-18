@@ -18,7 +18,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -180,65 +179,4 @@ CKEDITOR_CONFIGS = {
             'elementspath'
         ]),
     }
-}
-
-
-JAZZMIN_SETTINGS = {
-    "site_title": "SportByArt",
-    "site_header": "SportByArt",
-    "search_model": "mainapp.Article",
-    "site_logo": "ico/Logo01png.png",
-
-    "icons": {
-        "mainapp.AboutUs": "fas fa-file-word",
-        "mainapp.Article": "fas fa-newspaper",
-        "mainapp.Category": "fas fa-tag",
-        "mainapp.Comment": "fas fa-comments",
-        "mainapp.SubCategory":"fas fa-tags",
-        "mainapp.Subscribe": "fas fa-user-tag",
-
-        "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-    },
-    # "show_ui_builder": True,
-    "topmenu_links": [
-
-        # Url that gets reversed (Permissions can be added)
-        {"model": "mainapp.Article"},
-        {"name" : "Support", "url" : "https://www.facebook.com/sergo.khachaturyan", "new_window": True}
-    ],
-    # "related_modal_active": True,
-}
-
-JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": False,
-    "brand_small_text": False,
-    "brand_colour": False,
-    "accent": "accent-primary",
-    "navbar": "navbar-white navbar-light",
-    "no_navbar_border": False,
-    "navbar_fixed": True,
-    "layout_boxed": False,
-    "footer_fixed": False,
-    "sidebar_fixed": False,
-    "sidebar": "sidebar-dark-primary",
-    "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": False,
-    "sidebar_nav_child_indent": False,
-    "sidebar_nav_compact_style": False,
-    "sidebar_nav_legacy_style": True,
-    "sidebar_nav_flat_style": True,
-    "theme": "minty",
-    "dark_mode_theme": None,
-    "button_classes": {
-        "primary": "btn-outline-primary",
-        "secondary": "btn-outline-secondary",
-        "info": "btn-outline-info",
-        "warning": "btn-outline-warning",
-        "danger": "btn-outline-danger",
-        "success": "btn-outline-success"
-    },
-    "actions_sticky_top": False
 }

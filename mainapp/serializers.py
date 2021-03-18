@@ -43,3 +43,7 @@ class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscribe
         fields = "__all__"
+
+
+class SearchSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=20)

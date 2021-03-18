@@ -63,6 +63,7 @@ class Comment(models.Model):
 class AboutUs(models.Model):
     header = models.CharField('header', max_length=200)
     about_us_content = models.TextField()
+    thumb = models.ImageField('About us Image', blank=True, upload_to="AboutUs")
 
     def __str__(self):
         return self.header

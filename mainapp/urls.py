@@ -11,4 +11,5 @@ urlpatterns = [
     path('get-category/<int:category_id>/<int:page>', views.CategoryView.as_view()),
     path('about-us/', views.AboutUsView.as_view()),
     path('subscribe/', views.SubscribeView.as_view()),
+    path('search/', views.SearchView.as_view()),
 ]
