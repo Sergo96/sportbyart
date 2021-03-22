@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status, generics, filters
+from rest_framework import status
 from rest_framework.renderers import JSONRenderer
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -83,6 +83,24 @@ class AboutUsView(APIView):
         aboutus = AboutUs.objects.all()[:1]
         serializer_data = AboutUsSerializer(aboutus, many=True)
         return Response(serializer_data.data, status=status.HTTP_200_OK)
+
+
+class GalleryView(APIView):
+    def get(self, request, article_id):
+        gallery = Gallery.objects.filter(article=article_id)
+        if gallery.count() != 0:
+            gallery_serializer = GallerySerializer(gallery, many=True).data
+            return Response(gallery_serializer, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class VideoView(APIView):
+    def get(self, request):
+        video = Video.objects.all()
+        if video.count() != 0:
+            video_serializer = VideoSerializer(video, many=True).data
+            return Response(video_serializer, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class SubscribeView(APIView):

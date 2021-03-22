@@ -10,6 +10,12 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gallery
+        fields = "__all__"
+
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -47,3 +53,9 @@ class SubscribeSerializer(serializers.ModelSerializer):
 
 class SearchSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=20)
+
+
+class VideoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video
+        fields = "__all__"

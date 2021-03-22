@@ -45,6 +45,16 @@ class Article(models.Model):
         ordering = ['-publication']
 
 
+class Gallery(models.Model):
+    gallery_description = models.CharField('Description', max_length=200)
+    gallery_img = models.ImageField('Image', upload_to="gallery")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE) 
+
+    class Meta:
+        verbose_name = 'Gallery'
+        verbose_name_plural = 'Gallery'
+
+
 class Comment(models.Model):
     user_name = models.CharField('user name', max_length=20)
     email = models.EmailField('Email')
@@ -74,7 +84,7 @@ class AboutUs(models.Model):
 
 
 class Subscribe(models.Model):
-    subscriber_name = models.CharField('subscriber name', max_length=70)
+    subscriber_name = models.CharField('subscriber name', max_length=70)  # remove this
     subscriber_email = models.EmailField('subscriber email')
 
     class Meta:
@@ -83,3 +93,18 @@ class Subscribe(models.Model):
 
     def __str__(self):
         return self.subscriber_email
+
+
+class Video(models.Model):
+    video_title = models.CharField('title', max_length=200)
+    video_desc = models.TextField('description', help_text='we do not suggest you to write more than 200 symbols')
+    video = models.URLField('video url')
+    publication_date = models.DateTimeField('publication date', auto_now_add=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.video_title
+
+    class Meta:
+        verbose_name = 'Video'
+        verbose_name_plural = 'Video'
